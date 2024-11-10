@@ -40,13 +40,14 @@ dependencies:
   retrofit: ^4.4.1
   dio: ^5.7.0
 
-  flutter_bloc: ^8.1.6
+  bloc: ^8.1.4
 
   get_it: ^8.0.2
   floor: ^1.5.0
   equatable: ^2.0.5
   oktoast: ^3.4.0
   auto_route: ^9.2.2
+  
   
 dev_dependencies:
   flutter_test:
