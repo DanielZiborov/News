@@ -1,6 +1,6 @@
 part of 'remote_articles_cubit.dart';
 
-sealed class RemoteArticlesState extends Equatable {
+abstract class RemoteArticlesState extends Equatable {
   final List<Article> articles;
   final bool noMoreData;
   final DioException? error;

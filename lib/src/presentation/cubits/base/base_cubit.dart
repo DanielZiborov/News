@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:bloc/bloc.dart';
 
-class BaseCubit<S, T> extends Cubit<S> {
+abstract class BaseCubit<S, T> extends Cubit<S> {
   BaseCubit(super.initialState, this._data);
   final T _data;
 
