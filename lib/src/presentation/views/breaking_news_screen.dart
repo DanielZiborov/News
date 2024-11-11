@@ -1,28 +1,45 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:news/src/domain/models/article.dart';
 import 'package:news/src/presentation/cubits/remote_articles/remote_articles_cubit.dart';
+import 'package:news/src/presentation/widgets/article_widget.dart';
 import 'package:news/src/utils/extensions/scroll_controller.dart';
 
-class BreakingNewsScreen extends HookWidget {
+@RoutePage()
+class BreakingNewsScreen extends StatefulWidget {
   const BreakingNewsScreen({super.key});
 
   @override
+  _BreakingNewsScreenState createState() => _BreakingNewsScreenState();
+}
+
+class _BreakingNewsScreenState extends State<BreakingNewsScreen> {
+  late ScrollController _scrollController;
+  late RemoteArticlesCubit _remoteArticlesCubit;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController();
+
+    _remoteArticlesCubit = BlocProvider.of<RemoteArticlesCubit>(context);
+
+    _scrollController.onScrollEndsListener(() {
+      _remoteArticlesCubit.getBreakingNewsArticles();
+    });
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final remoteArticlesCubit = BlocProvider.of<RemoteArticlesCubit>(context);
-    final scrollController = useScrollController();
-
-    useEffect(() {
-      scrollController.onScrollEndsListener(() {
-        remoteArticlesCubit.getBreakingNewsArticles();
-      });
-
-      return scrollController.dispose;
-    }, const []);
-
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -33,13 +50,13 @@ class BreakingNewsScreen extends HookWidget {
       body: BlocBuilder<RemoteArticlesCubit, RemoteArticlesState>(
         builder: (_, state) {
           switch (state.runtimeType) {
-            case const (RemoteArticlesLoading):
+            case RemoteArticlesLoading:
               return const Center(child: CupertinoActivityIndicator());
-            case const (RemoteArticlesFailed):
+            case RemoteArticlesFailed:
               return const Center(child: Icon(Ionicons.refresh));
-            case const (RemoteArticlesSuccess):
+            case RemoteArticlesSuccess:
               return _buildArticles(
-                scrollController,
+                _scrollController,
                 state.articles,
                 state.noMoreData,
               );
