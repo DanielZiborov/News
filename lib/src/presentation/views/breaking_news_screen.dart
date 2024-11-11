@@ -50,11 +50,11 @@ class _BreakingNewsScreenState extends State<BreakingNewsScreen> {
       body: BlocBuilder<RemoteArticlesCubit, RemoteArticlesState>(
         builder: (_, state) {
           switch (state.runtimeType) {
-            case RemoteArticlesLoading:
+            case const (RemoteArticlesLoading):
               return const Center(child: CupertinoActivityIndicator());
-            case RemoteArticlesFailed:
+            case const (RemoteArticlesFailed):
               return const Center(child: Icon(Ionicons.refresh));
-            case RemoteArticlesSuccess:
+            case const (RemoteArticlesSuccess):
               return _buildArticles(
                 _scrollController,
                 state.articles,
