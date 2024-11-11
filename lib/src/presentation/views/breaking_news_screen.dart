@@ -5,6 +5,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:news/src/domain/models/article.dart';
 import 'package:news/src/presentation/cubits/remote_articles/remote_articles_cubit.dart';
+import 'package:news/src/utils/extensions/scroll_controller.dart';
 
 class BreakingNewsScreen extends HookWidget {
   const BreakingNewsScreen({super.key});
@@ -15,7 +16,7 @@ class BreakingNewsScreen extends HookWidget {
     final scrollController = useScrollController();
 
     useEffect(() {
-      scrollController.addListener(() {
+      scrollController.onScrollEndsListener(() {
         remoteArticlesCubit.getBreakingNewsArticles();
       });
 
