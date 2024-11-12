@@ -1,10 +1,14 @@
 import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
+import 'package:floor/floor.dart';
 
 import 'package:news/src/domain/models/source.dart';
+import 'package:news/src/utils/constants/strings.dart';
 
+@Entity(tableName: articlesTableName)
 class Article extends Equatable {
+  @PrimaryKey(autoGenerate: true)
   final int? id;
   final Source? source;
   final String? author;
