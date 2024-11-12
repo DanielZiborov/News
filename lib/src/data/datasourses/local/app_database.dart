@@ -1,8 +1,9 @@
+import 'dart:async';
 import 'package:floor/floor.dart';
 import 'package:news/src/data/datasourses/local/converters/source_type_converter.dart';
 import 'package:news/src/data/datasourses/local/dao/articles_dao.dart';
 import 'package:news/src/domain/models/article.dart';
-
+import 'package:sqflite/sqflite.dart' as sqflite;
 part 'app_database.g.dart';
 
 @TypeConverters([SourceTypeConverter])
@@ -10,4 +11,3 @@ part 'app_database.g.dart';
 abstract class AppDatabase extends FloorDatabase{
   ArticleDao get articleDao;
 }
-
