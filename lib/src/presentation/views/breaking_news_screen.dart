@@ -90,6 +90,9 @@ class _BreakingNewsScreenState extends State<BreakingNewsScreen> {
           delegate: SliverChildBuilderDelegate(
             (context, index) => ArticleWidget(
               article: articles[index],
+              onArticlePressed: (e) => context.router.push(
+                ArticlesDetailsRoute(article: e),
+              ),
             ),
             childCount: articles.length,
           ),
