@@ -11,10 +11,17 @@ part of 'app_router.dart';
 
 /// generated route for
 /// [ArticlesDetailsScreen]
-class ArticlesDetailsRoute extends PageRouteInfo<void> {
-  const ArticlesDetailsRoute({List<PageRouteInfo>? children})
-      : super(
+class ArticlesDetailsRoute extends PageRouteInfo<ArticlesDetailsRouteArgs> {
+  ArticlesDetailsRoute({
+    Key? key,
+    required Article article,
+    List<PageRouteInfo>? children,
+  }) : super(
           ArticlesDetailsRoute.name,
+          args: ArticlesDetailsRouteArgs(
+            key: key,
+            article: article,
+          ),
           initialChildren: children,
         );
 
@@ -23,9 +30,29 @@ class ArticlesDetailsRoute extends PageRouteInfo<void> {
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const ArticlesDetailsScreen();
+      final args = data.argsAs<ArticlesDetailsRouteArgs>();
+      return ArticlesDetailsScreen(
+        key: args.key,
+        article: args.article,
+      );
     },
   );
+}
+
+class ArticlesDetailsRouteArgs {
+  const ArticlesDetailsRouteArgs({
+    this.key,
+    required this.article,
+  });
+
+  final Key? key;
+
+  final Article article;
+
+  @override
+  String toString() {
+    return 'ArticlesDetailsRouteArgs{key: $key, article: $article}';
+  }
 }
 
 /// generated route for
