@@ -94,11 +94,15 @@ flutter:
   fonts:
     - family: Butler
       fonts:
-        - asset: assets/fonts/Butler
+        - asset: assets/fonts/Butler/Butler-Regular.ttf
+        - asset: assets/fonts/Butler/Butler-Bold.ttf
+        - asset: assets/fonts/Butler/Butler-Light.ttf
 
     - family: IBM
       fonts:
-        - asset: assets/fonts/IBMP
+        - asset: assets/fonts/IBMP/IBMPlexSans-Bold.ttf
+        - asset: assets/fonts/IBMP/IBMPlexSans-Light.ttf
+        - asset: assets/fonts/IBMP/IBMPlexSans-Regular.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
