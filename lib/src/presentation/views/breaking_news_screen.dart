@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:news/src/config/router/app_router.dart';
 import 'package:news/src/domain/models/article.dart';
 import 'package:news/src/presentation/cubits/remote_articles/remote_articles_cubit.dart';
 import 'package:news/src/presentation/widgets/article_widget.dart';
@@ -46,6 +47,15 @@ class _BreakingNewsScreenState extends State<BreakingNewsScreen> {
           'Daily News',
           style: TextStyle(color: Colors.black),
         ),
+        actions: [
+          GestureDetector(
+            onTap: () => context.router.push(const SaveArticlesDetailsRoute()),
+            child: const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 14),
+              child: Icon(Ionicons.bookmark, color: Colors.black),
+            ),
+          ),
+        ],
       ),
       body: BlocBuilder<RemoteArticlesCubit, RemoteArticlesState>(
         builder: (_, state) {
