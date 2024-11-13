@@ -11,7 +11,22 @@ class LocalArticlesCubit extends Cubit<LocalArticlesState> {
   LocalArticlesCubit(this._databaseRepository)
       : super(const LocalArticlesLoading());
 
-  Future<void> getAllSavedArticles async {
-    
+  Future<LocalArticlesState> _getAllSavedArticles() async {
+    final articles = await _databaseRepository.getSavedArticles();
+    return LocalArticlesSuccess(articles: articles);
+  }
+
+  Future<void> removeArticle({required Article article}) async {
+    await _databaseRepository.removeArticle(article);
+    emit(await _getAllSavedArticles());
+  }
+
+  Future<void> saveArticle({required Article article}) async {
+    await _databaseRepository.saveArticle(article);
+    emit(await _getAllSavedArticles());
+  }
+
+  Future<void> getAllSavedArticles() async {
+    emit(await _getAllSavedArticles());
   }
 }
