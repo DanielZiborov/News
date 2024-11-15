@@ -14,7 +14,7 @@ class RemoteArticlesCubit
   final ApiRepository _apiRepository;
   RemoteArticlesCubit(this._apiRepository)
       : super(const RemoteArticlesLoading(), []);
-  int _page = 1;
+  int page = 1;
 
   Future<void> getBreakingNewsArticles() async {
     if (isBusy) return;
@@ -30,7 +30,7 @@ class RemoteArticlesCubit
           final noMoreData = articles.length < defaultPageSize;
 
           data.addAll(articles);
-          _page++;
+          page++;
 
           emit(RemoteArticlesSuccess(
             articles: articles,
