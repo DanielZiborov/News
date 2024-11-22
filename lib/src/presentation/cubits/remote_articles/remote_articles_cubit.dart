@@ -18,22 +18,23 @@ class RemoteArticlesCubit
 
   Future<void> getBreakingNewsArticles() async {
     if (isBusy) return;
-
     await run(
       () async {
         final response = await _apiRepository.getBreakingNewsArticles(
-          request: BreakingNewsRequest(),
+          request: BreakingNewsRequest(page: page),
         );
 
         if (response is DataSuccess) {
           final articles = response.data!.articles;
           final noMoreData = articles.length < defaultPageSize;
 
-          data.addAll(articles);
-          page++;
+          if (articles.isNotEmpty) {
+            data.addAll(articles);
+            page++;
+          }
 
           emit(RemoteArticlesSuccess(
-            articles: articles,
+            articles: data,
             noMoreData: noMoreData,
           ));
         } else if (response is DataFailed) {
